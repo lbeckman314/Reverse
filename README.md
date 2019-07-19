@@ -83,7 +83,7 @@ KSQLKSFEERVEPRFVKDLVRIEQLDKEEVLLCIIRQGLFGGGGTVLCSWGA
 To compile and run source files, enter:
 
 ```sh
-mvn package && ./run.sh
+mvn compile && ./run.sh
 ```
 
 ## CI/CD

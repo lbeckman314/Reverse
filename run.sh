@@ -1,1 +1,1 @@
-java -cp "target/*" com.liambeckman.reverse.Reverse --verbose
+java -classpath "target/classes/:target/*" com.liambeckman.reverse.Reverse --verbose

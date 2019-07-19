@@ -97,25 +97,24 @@ public class Reverse {
             // used in ">REV_00000X reversed" output line.
             int protein_num = 0;
 
-            // read all lines in file.
-            while(reader.ready()) {
-                String id = "";
-                String amino_acids = "";
+            String line = "";
+            String amino_acids = "";
 
-                // read id line
-                String line = reader.readLine();
+            // continue from first id line.
+            line = reader.readLine();
+            if (line.charAt(0) != '>') {
+                System.out.println("File does not begin with valid Protein ID ('>EXAMPLE')");
+                System.exit(1);
+            }
+
+            // read all lines in file.
+            while((line = reader.readLine()) != null) {
+                System.out.println("line: " + line);
 
                 if (line.charAt(0) == '>') {
-
-                    // read amino acid line
-                    line = reader.readLine();
-                    while (line != null && line.charAt(0) != '>') {
-                        amino_acids += line;
-                        line = reader.readLine();
-                    }
-
                     // create id (e.g. ">REV_000001 reversed")
                     protein_num += 1;
+                    String id = "";
                     id = String.format("%1$" + 6 + "s", Integer.toString(protein_num)).replace(' ', '0');
                     id = ">REV_" + id + " reversed";
 
@@ -124,8 +123,26 @@ public class Reverse {
 
                     Protein protein = new Protein(id, amino_acids_reversed);
                     proteins.add(protein);
+                    amino_acids = "";
+                    continue;
                 }
+
+                // read amino acid line
+                amino_acids += line;
             }
+
+            // build last protein
+            protein_num += 1;
+            String id = "";
+            id = String.format("%1$" + 6 + "s", Integer.toString(protein_num)).replace(' ', '0');
+            id = ">REV_" + id + " reversed";
+
+            // create reversed amino_acid sequence.
+            String amino_acids_reversed = new StringBuilder(amino_acids).reverse().toString();
+
+            Protein protein = new Protein(id, amino_acids_reversed);
+            proteins.add(protein);
+
         }
         catch(Exception err) {
             err.printStackTrace();
@@ -139,9 +156,12 @@ public class Reverse {
         BufferedWriter writer;
         try {
             writer = new BufferedWriter(new FileWriter(filename, true));
+            // write reversed proteins to file.
             for (Protein protein : proteins) {
                 writer.write(protein.id);
                 writer.newLine();
+
+                // set lines to wrap at line_length.
                 String amino_acids_wrapped = WordUtils.wrap(protein.amino_acids, line_length, null, true);
                 writer.write(amino_acids_wrapped);
                 writer.newLine();
@@ -158,6 +178,7 @@ public class Reverse {
         }
     }
 
+    // used to clear the output file before writing.
     public static void clear_file(String filename) {
         BufferedWriter writer;
         try {
