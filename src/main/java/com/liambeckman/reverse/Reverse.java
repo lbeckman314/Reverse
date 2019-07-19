@@ -9,13 +9,7 @@ import java.io.InputStreamReader;
 import java.util.Vector;
 import java.io.FileInputStream;
 
-import org.apache.commons.cli.CommandLine;
-import org.apache.commons.cli.Option;
-import org.apache.commons.cli.Options;
-import org.apache.commons.cli.Option.Builder;
-import org.apache.commons.cli.CommandLineParser;
-import org.apache.commons.cli.DefaultParser;
-import org.apache.commons.cli.ParseException;
+import org.apache.commons.cli.*;
 import org.apache.commons.text.WordUtils;
 
 
@@ -24,17 +18,20 @@ public class Reverse {
         Vector<Protein> proteins = new Vector<Protein>();
 
         Options options = new Options();
-        Option infile_opt = new Option("i", "input", true, "input file");
+        Option infile_opt = new Option("i", "input", true, "input file (default: dummy.fasta in target/reverse-*.jar).");
         options.addOption(infile_opt);
 
-        Option outfile_opt = new Option("o", "output", true, "output file");
+        Option outfile_opt = new Option("o", "output", true, "output file (default: rev.fasta).");
         options.addOption(outfile_opt);
 
-        Option line_length_opt = new Option("l", "linelength", true, "line length");
+        Option line_length_opt = new Option("l", "linelength", true, "length of line in output (default: 80).");
         options.addOption(line_length_opt);
 
-        Option verbose_opt = new Option("v", "verbose", false, "be verbose");
+        Option verbose_opt = new Option("v", "verbose", false, "Be verbose (default: false).");
         options.addOption(verbose_opt);
+
+        Option help_opt = new Option("h", "help", false, "Print help message.");
+        options.addOption(help_opt);
 
         CommandLineParser parser = new DefaultParser();
         CommandLine cmd;
@@ -59,6 +56,11 @@ public class Reverse {
             if (cmd.hasOption("verbose")) {
                 verbose = true;
             }
+            if (cmd.hasOption("help")) {
+                HelpFormatter formatter = new HelpFormatter();
+                formatter.printHelp("Reverse", options);
+            }
+
         } catch (ParseException err) {
             System.out.println(err.getMessage());
         }
