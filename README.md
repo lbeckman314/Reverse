@@ -4,6 +4,17 @@
 
 This java project reverses amino acid sequences in proteins! The "main" source file is [Reverse.java](./src/main/java/com/liambeckman/reverse/Reverse.java).
 
+* [Quick Start](#quick-start)
+  + [Requirements](#requirements)
+  + [Running](#running)
+* [Options](#options)
+* [Example](#example)
+  + [Input](#input)
+  + [Output](#output)
+* [Development](#development)
+  + [Requirements](#requirements-1)
+* [CI/CD](#cicd)
+
 ## Quick Start
 
 ```sh
