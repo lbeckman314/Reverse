@@ -109,8 +109,8 @@ public class Reverse {
 
             // read all lines in file.
             while((line = reader.readLine()) != null) {
-                System.out.println("line: " + line);
 
+                // protein id line
                 if (line.charAt(0) == '>') {
                     // create id (e.g. ">REV_000001 reversed")
                     protein_num += 1;
@@ -127,7 +127,7 @@ public class Reverse {
                     continue;
                 }
 
-                // read amino acid line
+                // amino acid line
                 amino_acids += line;
             }
 
