@@ -1,3 +1,5 @@
+https://travis-ci.org/lbeckman314/Reverse.svg?branch=master
+
 # Reverse
 
 This java project reverses amino acid sequences in proteins!
