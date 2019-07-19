@@ -86,6 +86,10 @@ To compile and run source files, enter:
 mvn package && ./run.sh
 ```
 
-## TODO
+## CI/CD
 
-- Implement testing in [ReverseTest.java](./src/test/java/com/liambeckman/reverse/ReverseTest.java)
+A simple test suite is defined in [ReverseTest.java](./src/test/java/com/liambeckman/reverse/ReverseTest.java). It's invoked with `mvn verify` in the [.travis.yml](./.travis.yml) file upon every push to the `master` branch.
+ 
+Build results may be viewed at [travis-ci.org](https://travis-ci.org/lbeckman314/Reverse)
+
+[![Screenshot of Travis CI](./build.png)](https://travis-ci.org/lbeckman314/Reverse)
